@@ -4,9 +4,9 @@ namespace task_tracker.Hub
 {
     public class SuccessMessagesHub : Hub<ISuccessMessagesHubClient>
     {
-        public async Task SendSuccessesToUser(List<bool> message)
+        public async Task SendSuccessesToUser(List<bool> successes)
         {
-            await Clients.All.SendSuccessesToUser(message);
+            await Clients.All.SendSuccessesToUser(successes);
         }
     }
 }

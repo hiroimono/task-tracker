@@ -1,6 +1,15 @@
 <body>
   <app-nav-menu></app-nav-menu>
   <div class="container">
+    <h2>Data loaded from the Web API:</h2>
+
+    <div *ngIf="successes.length>0" class="alert alert-warning" role="alert">
+      <li *ngFor="let success of successes">
+        <span *ngIf="success; else NoSuccess">Successes: {{ 'Correct' }}</span>
+        <ng-template #NoSuccess>Successes: {{ 'False' }}</ng-template>
+      </li>
+    </div>
+
     <router-outlet></router-outlet>
   </div>
 </body>
