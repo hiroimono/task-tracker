@@ -11,6 +11,7 @@ builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUsersFacade, UsersFacade>();
+builder.Services.AddScoped<ITasksFacade, TasksFacade>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();

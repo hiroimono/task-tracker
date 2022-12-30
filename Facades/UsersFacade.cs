@@ -68,6 +68,8 @@ namespace task_tracker.Facades
 
             _context.Users!.Remove(user);
 
+            _context.SaveChanges();
+
             _logger.LogInformation($"User data has been successfully deleted from the database. User Nickname: {user.Nickname}");
 
             return true;
@@ -83,7 +85,7 @@ namespace task_tracker.Facades
                 {
                     var user = new User { Id = id };
                     ctx.Users!.Attach(user);
-                    ctx.Users.Remove(user);
+                    ctx.Users!.Remove(user);
                     await ctx.SaveChangesAsync();
                     _logger.LogInformation($"User data has been successfully deleted from the database. User Nickname: {user.Nickname}");
                     return true;

@@ -61,6 +61,50 @@ namespace task_tracker.Controllers
             }
         }
 
+        // GET api/users/:id/avatar
+        [HttpGet("{id}/avatar")]
+        public async Task<IActionResult> GetUserAvatar(int id)
+        {
+            try
+            {
+                var user = await _usersfacade.GetUserByIdAsync(id);
+
+                if (user == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, $"User Avatar with id:{id} could not found!");
+                }
+
+                return Ok(user.Avatar);
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex.Message);
+                return StatusCode(StatusCodes.Status404NotFound, $"User Avatar with id:{id} could not found!");
+            }
+        }
+
+        // GET api/users/:id/is-admin
+        [HttpGet("{id}/is-admin")]
+        public async Task<IActionResult> IsUserAdmin(int id)
+        {
+            try
+            {
+                var user = await _usersfacade.GetUserByIdAsync(id);
+
+                if (user == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, $"User Role with id:{id} could not found!");
+                }
+
+                return Ok(user.IsAdmin);
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex.Message);
+                return StatusCode(StatusCodes.Status404NotFound, $"User Role with id:{id} could not found!");
+            }
+        }
+
         // POST api/users { User }
         [HttpPost]
         public async Task<IActionResult> AddUser(User user)
@@ -74,7 +118,7 @@ namespace task_tracker.Controllers
             catch (Exception Ex)
             {
                 _logger.LogError(Ex.Message);
-                return StatusCode(StatusCodes.Status400BadRequest, $"User could not be edited!");
+                return StatusCode(StatusCodes.Status400BadRequest, $"User could not be added!");
             }
         }
 
@@ -91,6 +135,22 @@ namespace task_tracker.Controllers
             {
                 _logger.LogError(Ex.Message);
                 return StatusCode(StatusCodes.Status400BadRequest, $"User could not be edited!");
+            }
+        }
+
+        // DELETE api/users { User }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUserById(int id)
+        {
+            try
+            {
+                var isDeleted = _usersfacade.DeleteUser(id);
+                return Ok(isDeleted);
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex.Message);
+                return StatusCode(StatusCodes.Status400BadRequest, $"User could not be deleted!");
             }
         }
     }
