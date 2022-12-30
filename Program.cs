@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using task_tracker.Facades;
 using task_tracker.Hub;
+using task_tracker.Interfaces;
 using task_tracker.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IUsersFacade, UsersFacade>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
