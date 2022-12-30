@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
+/** PrimeNg */
+import { PrimeNGConfig } from 'primeng/api';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +14,16 @@ export class AppComponent {
   public title = 'SignalRClient';
   public successes: boolean[] = [];
 
+  constructor(
+    private primengConfig: PrimeNGConfig
+  ) { }
+
   ngOnInit(): void {
+    this.initiateHub();
+    this.activateRipple();
+  }
+
+  private initiateHub(): void {
     this.hubConnectionBuilder = new HubConnectionBuilder()
       .withUrl('https://localhost:7275/successes')
       .configureLogging(LogLevel.Information).build();
@@ -24,5 +36,9 @@ export class AppComponent {
       console.log('result: ', result);
       this.successes = [...this.successes, ...result];
     });
+  }
+
+  private activateRipple(): void {
+    this.primengConfig.ripple = true;
   }
 }

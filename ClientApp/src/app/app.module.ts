@@ -8,9 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
 
+/** Components */
 import { AppComponent } from './app.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+
+/** PrimeNg Modules */
+import { RippleModule } from 'primeng/ripple';
+import { StyleClassModule } from 'primeng/styleclass';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
-    HomeModule
+    HomeModule,
+    RippleModule,
+    StyleClassModule
   ],
   providers: [],
   bootstrap: [AppComponent]

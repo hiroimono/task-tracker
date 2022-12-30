@@ -1,6 +1,8 @@
 <body>
   <app-nav-menu></app-nav-menu>
-  <div class="container">
+  <router-outlet></router-outlet>
+
+  <!-- <div class="container-fluid px-5-fluid">
     <h2>Data loaded from the Web API:</h2>
 
     <div *ngIf="successes.length>0" class="alert alert-warning" role="alert">
@@ -9,7 +11,5 @@
         <ng-template #NoSuccess>Successes: {{ 'False' }}</ng-template>
       </li>
     </div>
-
-    <router-outlet></router-outlet>
-  </div>
+  </div> -->
 </body>
