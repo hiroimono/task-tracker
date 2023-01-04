@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  hubUrl: 'https://localhost:7275/successes'
+  hubUrl: 'https://task-tracker-01.azurewebsites.net/successes'
 };
