@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+/** Services */
+import { SuccessesHubService } from './services/successes-hub.service';
+
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -16,6 +19,9 @@ import { FooterComponent } from './components/footer/footer.component';
     CommonModule,
     FormsModule,
     RouterModule
+  ],
+  providers: [
+    SuccessesHubService
   ],
   exports: [
     NavMenuComponent,

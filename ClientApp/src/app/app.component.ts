@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { SuccessesHubService } from './core/services/successes-hub.service';
 
 /** PrimeNg */
 import { PrimeNGConfig } from 'primeng/api';
@@ -10,32 +10,18 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private hubConnectionBuilder!: HubConnection;
   public title = 'SignalRClient';
-  public successes: boolean[] = [];
 
   constructor(
+    private _successHub: SuccessesHubService,
     private primengConfig: PrimeNGConfig
   ) { }
 
   ngOnInit(): void {
-    this.initiateHub();
+    this._successHub.startConnection();
+    this._successHub.listenSuccesses();
+
     this.activateRipple();
-  }
-
-  private initiateHub(): void {
-    this.hubConnectionBuilder = new HubConnectionBuilder()
-      .withUrl('https://localhost:7275/successes')
-      .configureLogging(LogLevel.Information).build();
-
-    this.hubConnectionBuilder.start()
-      .then(() => console.log('Connection started.......!'))
-      .catch(err => console.log('Error while connect with server'));
-
-    this.hubConnectionBuilder.on('SendSuccessesToUser', (result: boolean[]) => {
-      console.log('result: ', result);
-      this.successes = [...this.successes, ...result];
-    });
   }
 
   private activateRipple(): void {

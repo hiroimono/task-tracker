@@ -12,13 +12,9 @@ export class HomeComponent {
 
   constructor(
     private primengConfig: PrimeNGConfig
-  ) { }
-
-  ngOnInit(): void {
-    this.activateRipple();
-  }
-
-  private activateRipple(): void {
+  ) {
     this.primengConfig.ripple = true;
   }
+
+  ngOnInit(): void { }
 }

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using task_tracker;
 using task_tracker.Facades;
 using task_tracker.Hub;
 using task_tracker.Interfaces;
@@ -9,11 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 builder.Services.AddScoped<IUsersFacade, UsersFacade>();
 builder.Services.AddScoped<ITasksFacade, TasksFacade>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddHostedService<HubTimer>();
+builder.Services.AddScoped<ISuccessesFacade, SuccessesFacade>();
+
 builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
@@ -25,6 +27,10 @@ builder.Services.AddCors(options =>
         .AllowCredentials()
         .SetIsOriginAllowed((hosts) => true));
 });
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
@@ -49,9 +55,10 @@ app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-    endpoints.MapHub<SuccessMessagesHub>("/successes");
+    endpoints.MapHub<SuccessHub>("/successes");
 });
 app.UseHttpsRedirection();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 app.Run();
+

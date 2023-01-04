@@ -10,7 +10,7 @@ import { CoreModule } from './core/core.module';
 
 /** Components */
 import { AppComponent } from './app.component';
-import { CounterComponent } from './counter/counter.component';
+import { WorkshopComponent } from './workshop/workshop.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 /** PrimeNg Modules */
@@ -20,7 +20,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 @NgModule({
   declarations: [
     AppComponent,
-    CounterComponent,
+    WorkshopComponent,
     FetchDataComponent
   ],
   imports: [

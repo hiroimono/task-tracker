@@ -1,0 +1,15 @@
+<div class="container-fluid px-5 mt-3">
+  <h1>Workshops</h1>
+
+  <p>This is a simple example of an Angular component.</p>
+
+  <h3>All Successes</h3>
+  <ul>
+    <li *ngFor="let success of successes">
+      Taskname: {{ success.task?.taskName }}
+      User Nickname: {{ success.user?.nickname }}
+    </li>
+  </ul>
+
+  <button class="btn btn-primary">Send Success</button>
+</div>

@@ -1,26 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CounterComponent } from './counter.component';
+import { WorkshopComponent } from './workshop.component';
 
-describe('CounterComponent', () => {
-  let fixture: ComponentFixture<CounterComponent>;
+describe('WorkshopComponent', () => {
+  let fixture: ComponentFixture<WorkshopComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CounterComponent ]
+      declarations: [WorkshopComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CounterComponent);
+    fixture = TestBed.createComponent(WorkshopComponent);
     fixture.detectChanges();
   });
-
-  it('should display a title', async(() => {
-    const titleText = fixture.nativeElement.querySelector('h1').textContent;
-    expect(titleText).toEqual('Counter');
-  }));
 
   it('should start with count 0, then increments by 1 when clicked', async(() => {
     const countElement = fixture.nativeElement.querySelector('strong');
