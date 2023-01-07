@@ -1,25 +1,29 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow">
     <div class="container-fluid px-5">
-      <a class="navbar-brand text-white" [routerLink]="['/']">Task Tracker Tool</a>
+      <a class="navbar-brand text-white" [routerLink]="['/']">
+        <h2>Task Tracker Tool</h2>
+      </a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
         aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
+      <div class="navLinks navbar-collapse collapse d-sm-inline-flex justify-content-end"
+        [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-white" [routerLink]="['/']">Home</a>
+          <li class="nav-item mx-1">
+            <a pRipple class="nav-link text-white" routerLink="/home" routerLinkActive="active"
+              [routerLinkActiveOptions]={exact:true}>Home</a>
           </li>
 
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-white" [routerLink]="['/workshop']">Workshop</a>
+          <li class="nav-item mx-1">
+            <a pRipple class="nav-link text-white" routerLink="/workshop" routerLinkActive="active">Workshop</a>
           </li>
 
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-white" [routerLink]="['/fetch-data']">Fetch data</a>
+          <li class="nav-item mx-1">
+            <a pRipple class="nav-link text-white" routerLink="/fetch-data" routerLinkActive="active">Fetch data</a>
           </li>
         </ul>
       </div>

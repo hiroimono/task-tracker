@@ -9,6 +9,8 @@ import { SuccessesHubService } from './services/successes-hub.service';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+/** PrimeNg */
+import { RippleModule } from 'primeng/ripple';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { FooterComponent } from './components/footer/footer.component';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    RippleModule
   ],
   providers: [
     SuccessesHubService

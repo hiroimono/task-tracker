@@ -2,3 +2,13 @@
 @import "primeflex/primeflex.css";
 
 /* Provide sufficient contrast against white background */
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  header nav {
+    height: 80px;
+  }
+}
