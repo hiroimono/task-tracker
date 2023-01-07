@@ -13,14 +13,10 @@ export class AppComponent {
   public title = 'SignalRClient';
 
   constructor(
-    private _successHub: SuccessesHubService,
     private primengConfig: PrimeNGConfig
   ) { }
 
   ngOnInit(): void {
-    this._successHub.startConnection();
-    this._successHub.listenSuccesses();
-
     this.activateRipple();
   }
 

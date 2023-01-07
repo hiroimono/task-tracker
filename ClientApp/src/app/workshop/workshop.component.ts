@@ -3,38 +3,43 @@ import { Component } from '@angular/core';
 
 /** Services */
 import { SuccessesHubService } from 'src/app/core/services/successes-hub.service';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-workshop-component',
   templateUrl: './workshop.component.html'
 })
 export class WorkshopComponent {
+  private compDestroyed$: Subject<boolean> = new Subject();
   public successes: Success[] = [];
-  public testSuccess: Success = {
-    "id": 3,
-    "taskId": 1,
-    "task": {
-      "id": 1,
-      "taskName": "Add Controllers",
-      "duration": 60,
-      "isActiv": false,
-      "isBreak": false
-    },
-    "userId": 3,
-    "user": {
-      "id": 3,
-      "isAdmin": false,
-      "nickname": "Niky",
-      "avatar": "https://robohash.org/nicky?set=set2"
-    },
-    "isDone": true
+  public subs!: Subscription;
+  private count = 0;
+
+  constructor(
+    private _successesHub: SuccessesHubService
+  ) {
   }
 
-  constructor(private _successesHub: SuccessesHubService) { }
-
   ngOnInit() {
-    this._successesHub.successes.subscribe(
-      successes => this.successes = successes
-    );
+    this.successes = []
+    this._successesHub.listenSuccesses()
+
+    this.subs = this._successesHub.successes
+      .pipe(takeUntil(this.compDestroyed$))
+      .subscribe(
+        successes => {
+          this.count++
+          console.log('this.count: ', this.count);
+          this.successes = [...this.successes, ...successes]
+        }
+      )
+  }
+
+  ngOnDestroy() {
+    this.compDestroyed$.next(true)
+    this.compDestroyed$.complete()
+    this._successesHub.stopListenningSuccesses()
+    this.count = 0
+    console.log('this.count: ', this.count)
   }
 }

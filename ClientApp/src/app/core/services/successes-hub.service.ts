@@ -24,6 +24,7 @@ export class SuccessesHubService {
       successes: []
     }
     this.successes = this._successes.asObservable();
+    this.startConnection();
   }
 
   public startConnection = (): void => {
@@ -41,8 +42,12 @@ export class SuccessesHubService {
   public listenSuccesses() {
     this.hubConnection.on('SendSuccessesToUser', (coming: Success[]) => {
       console.log('coming successes: ', coming);
-      this.dataStore.successes = [...this.dataStore.successes, ...coming];
+      this.dataStore.successes = [...coming];
       this._successes.next([...this.dataStore.successes]);
     });
+  }
+
+  public stopListenningSuccesses() {
+    this.hubConnection.off('SendSuccessesToUser')
   }
 }
