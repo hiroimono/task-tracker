@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   hubUrl: 'https://localhost:7275/successes',
+  baseUrl: 'https://localhost:7275',
 };
 
 /*

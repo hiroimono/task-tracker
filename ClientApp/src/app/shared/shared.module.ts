@@ -9,11 +9,12 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-
-
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    RegisterComponent
+  ],
   imports: [
     CommonModule,
     RippleModule,
@@ -30,7 +31,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     AvatarGroupModule,
     TooltipModule,
     ButtonModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    RegisterComponent
   ]
 })
 export class SharedModule { }
