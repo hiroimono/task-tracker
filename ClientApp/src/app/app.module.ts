@@ -11,8 +11,8 @@ import { SharedModule } from './shared/shared.module';
 
 /** Components */
 import { AppComponent } from './app.component';
-import { WorkshopComponent } from './workshop/workshop.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { WorkshopComponent } from './screens/workshop/workshop.component';
+import { FetchDataComponent } from './screens/fetch-data/fetch-data.component';
 
 @NgModule({
   declarations: [
