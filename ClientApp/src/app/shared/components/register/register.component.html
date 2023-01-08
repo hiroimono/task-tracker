@@ -1,1 +1,38 @@
-<p>register works!</p>
+<div class="surface-card p-4 shadow-2 border-round w-full">
+	<div class="text-center mb-5">
+		<i class="fa fa-user fa-4x"></i>
+
+		<div class="text-900 text-3xl font-medium mb-3">
+			Welcome
+		</div>
+	</div>
+
+	<div>
+		<label for="nickname" class="block text-900 font-medium mb-2">Nickname</label>
+		<input id="nickname" type="text" placeholder="Email address" pInputText class="w-full mb-3">
+
+		<label for="avatar" class="block text-900 font-medium mb-2">Avatar</label>
+		<input id="avatar" type="text" placeholder="Password" pInputText class="w-full mb-3">
+
+		<div class="d-flex flex-column justify-content-center align-items-center">
+			<div class="iconBox bg-warning">
+				<img class="img-fluid" src="https://robohash.org/huseyin?set=set3" alt="robohash_img">
+			</div>
+		</div>
+		<!-- <div class="flex align-items-center justify-content-between mb-6">
+			<div class="flex align-items-center">
+				<p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
+
+				<label for="rememberme1" class="text-900">
+					Remember me
+				</label>
+			</div>
+
+			<a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">
+				Forgot password?
+			</a>
+		</div> -->
+
+		<button pButton pRipple label="Sign In" icon="pi pi-user" class="w-full mt-3"></button>
+	</div>
+</div>

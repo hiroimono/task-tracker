@@ -10,6 +10,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { RegisterComponent } from './components/register/register.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,13 @@ import { RegisterComponent } from './components/register/register.component';
     StyleClassModule,
     AvatarModule,
     AvatarGroupModule,
-    TooltipModule
+    TooltipModule,
+    ButtonModule,
+    DynamicDialogModule,
+    CheckboxModule
   ],
   exports: [
+    RegisterComponent,
     CommonModule,
     RippleModule,
     StyleClassModule,
@@ -32,7 +37,7 @@ import { RegisterComponent } from './components/register/register.component';
     TooltipModule,
     ButtonModule,
     DynamicDialogModule,
-    RegisterComponent
+    CheckboxModule
   ]
 })
 export class SharedModule { }

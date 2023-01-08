@@ -38,8 +38,7 @@ export class HomeComponent {
       // data: {
       //   id: '51gF3'
       // },
-      header: 'Choose a Car',
-      width: '70%'
+      header: 'Registration'
     });
   }
 }
