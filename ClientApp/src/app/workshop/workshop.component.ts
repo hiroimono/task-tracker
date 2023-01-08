@@ -30,7 +30,7 @@ export class WorkshopComponent {
         successes => {
           this.count++
           console.log('this.count: ', this.count);
-          this.successes = [...this.successes, ...successes]
+          this.successes = [...successes]
         }
       )
   }

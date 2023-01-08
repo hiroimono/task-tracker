@@ -7,15 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 /** Modules */
 import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 /** Components */
 import { AppComponent } from './app.component';
 import { WorkshopComponent } from './workshop/workshop.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-
-/** PrimeNg Modules */
-import { RippleModule } from 'primeng/ripple';
-import { StyleClassModule } from 'primeng/styleclass';
 
 @NgModule({
   declarations: [
@@ -24,14 +21,13 @@ import { StyleClassModule } from 'primeng/styleclass';
     FetchDataComponent
   ],
   imports: [
-    CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    CommonModule,
+    SharedModule,
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
-    HomeModule,
-    RippleModule,
-    StyleClassModule
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

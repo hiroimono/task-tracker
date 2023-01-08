@@ -1,15 +1,23 @@
 <div class="container-fluid px-5 mt-3">
-  <h1>Workshops</h1>
+	<h1>Workshops</h1>
 
-  <p>This is a simple example of an Angular component.</p>
+	<p>This is a simple example of an Angular component.</p>
 
-  <h3>All Successes</h3>
-  <ul>
-    <li *ngFor="let success of successes">
-      Taskname: {{ success.task?.taskName }}
-      User Nickname: {{ success.user?.nickname }}
-    </li>
-  </ul>
+	<h3>All Successes</h3>
 
-  <button class="btn btn-primary">Send Success</button>
+	<div class="col-12 md:col-4">
+		<h5>Avatar Group</h5>
+		<div class="card">
+			<div class="card-body">
+				<p-avatarGroup styleClass="mb-3">
+					<ng-container *ngFor="let success of successes">
+						<p-avatar *ngIf="success.user" [image]="success.user.avatar!" size="xlarge" shape="circle">
+						</p-avatar>
+					</ng-container>
+				</p-avatarGroup>
+			</div>
+		</div>
+	</div>
+
+	<button class="btn btn-primary">Send Success</button>
 </div>

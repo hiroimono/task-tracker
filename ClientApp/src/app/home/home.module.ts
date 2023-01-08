@@ -2,13 +2,11 @@ import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 
+/** Modules */
+import { SharedModule } from 'src/app/shared/shared.module';
+
 /** Components */
 import { HomeComponent } from './home.component';
-
-/** PrimeNg Modules */
-import { RippleModule } from 'primeng/ripple';
-import { StyleClassModule } from 'primeng/styleclass';
-import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -17,9 +15,7 @@ import { ButtonModule } from 'primeng/button';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    RippleModule,
-    StyleClassModule,
-    ButtonModule
+    SharedModule
   ]
 })
 export class HomeModule { }
