@@ -4,8 +4,10 @@ import { environment } from 'src/environments/environment';
 
 /** Services */
 import { DataStoreService } from './data-store.service';
-import { Success } from '../models/success.model';
+
+/** Models */
 import { DataStore } from '../models/store.model';
+import { Success } from '../models/success.model';
 
 @Injectable({
   providedIn: 'root'

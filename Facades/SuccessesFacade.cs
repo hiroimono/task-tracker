@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Threading.Tasks;
 using task_tracker.Hub;
 using task_tracker.Interfaces;
 using task_tracker.Models;

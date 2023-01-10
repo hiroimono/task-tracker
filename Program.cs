@@ -11,10 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddHostedService<HubTimer>();
 builder.Services.AddScoped<ITasksFacade, TasksFacade>();
-builder.Services.AddScoped<IUsersFacade, UsersFacade>();
+
+builder.Services.AddHostedService<HubTimerSuccess>();
 builder.Services.AddScoped<ISuccessesFacade, SuccessesFacade>();
+
+builder.Services.AddHostedService<HubTimerUser>();
+builder.Services.AddScoped<IUsersFacade, UsersFacade>();
 
 builder.Services.AddSignalR();
 
@@ -54,9 +57,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers();
     endpoints.MapHub<SuccessHub>("/successes");
-    endpoints.MapHub<SuccessHub>("/users");
+    endpoints.MapHub<UserHub>("/users");
+    endpoints.MapControllers();
 });
 app.UseHttpsRedirection();
 app.MapControllers();

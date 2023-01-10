@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using task_tracker.Facades;
 using task_tracker.Interfaces;
 using task_tracker.Models;
 
@@ -10,19 +9,21 @@ namespace task_tracker.Controllers
     public class UsersController : Controller
     {
         private readonly ILogger<UsersController> _logger;
-        private readonly IUsersFacade _usersfacade;
+        private readonly IUsersFacade _usersFacade;
 
-        public UsersController(ILogger<UsersController> logger, IUsersFacade usersFacade)
+        public UsersController(
+            ILogger<UsersController> logger,
+            IUsersFacade usersFacade)
         {
             _logger = logger;
-            _usersfacade = usersFacade;
+            _usersFacade = usersFacade;
         }
 
         [HttpPost]
         [Route("Hub")]
         public string GetAllUsersWithHub()
         {
-            User[] users = _usersfacade.GetAllUsers();
+            User[] users = _usersFacade.GetAllUsers();
 
             return "Users sent successfully to all users!";
         }
@@ -33,7 +34,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var users = await _usersfacade.GetAllUsersAsync();
+                var users = await _usersFacade.GetAllUsersAsync();
 
                 if (users == null)
                 {
@@ -55,7 +56,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var user = await _usersfacade.GetUserByIdAsync(id);
+                var user = await _usersFacade.GetUserByIdAsync(id);
 
                 if (user == null)
                 {
@@ -77,7 +78,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var user = await _usersfacade.GetUserByIdAsync(id);
+                var user = await _usersFacade.GetUserByIdAsync(id);
 
                 if (user == null)
                 {
@@ -99,7 +100,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var user = await _usersfacade.GetUserByIdAsync(id);
+                var user = await _usersFacade.GetUserByIdAsync(id);
 
                 if (user == null)
                 {
@@ -122,7 +123,7 @@ namespace task_tracker.Controllers
 
             try
             {
-                var newUser = await _usersfacade.AddUserAsync(user);
+                var newUser = await _usersFacade.AddUserAsync(user);
                 return CreatedAtAction(nameof(AddUser), new { id = user.Id }, user);
             }
             catch (Exception Ex)
@@ -138,7 +139,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var editedUser = await _usersfacade.EditUserAsync(user);
+                var editedUser = await _usersFacade.EditUserAsync(user);
                 return Ok(editedUser);
             }
             catch (Exception Ex)
@@ -154,7 +155,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var isDeleted = _usersfacade.DeleteUser(id);
+                var isDeleted = _usersFacade.DeleteUser(id);
                 return Ok(isDeleted);
             }
             catch (Exception Ex)

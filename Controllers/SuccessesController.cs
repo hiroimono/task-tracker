@@ -9,21 +9,21 @@ namespace task_tracker.Controllers
     public class SuccessesController : Controller
     {
         private readonly ILogger<SuccessesController> _logger;
-        private readonly ISuccessesFacade _successesfacade;
+        private readonly ISuccessesFacade _successesFacade;
 
         public SuccessesController(
             ILogger<SuccessesController> logger,
             ISuccessesFacade successesFacade)
         {
             _logger = logger;
-            _successesfacade = successesFacade;
+            _successesFacade = successesFacade;
         }
 
         [HttpPost]
         [Route("Hub")]
         public string GetAllSuccessesWithHub()
         {
-            Success[] successes = _successesfacade.GetAllSuccesses();
+            Success[] successes = _successesFacade.GetAllSuccesses();
 
             return "Successes sent successfully to all users!";
         }
@@ -34,7 +34,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var successes = await _successesfacade.GetAllSuccessesAsync();
+                var successes = await _successesFacade.GetAllSuccessesAsync();
 
                 if (successes == null)
                 {
@@ -56,7 +56,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var success = await _successesfacade.GetSuccessByIdAsync(id);
+                var success = await _successesFacade.GetSuccessByIdAsync(id);
 
                 if (success == null)
                 {
@@ -79,7 +79,7 @@ namespace task_tracker.Controllers
 
             try
             {
-                var newSuccess = await _successesfacade.AddSuccessAsync(taskId, userId);
+                var newSuccess = await _successesFacade.AddSuccessAsync(taskId, userId);
                 return CreatedAtAction(nameof(AddSuccess), newSuccess);
             }
             catch (Exception Ex)
@@ -95,7 +95,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var editedSuccess = await _successesfacade.EditSuccessAsync(success);
+                var editedSuccess = await _successesFacade.EditSuccessAsync(success);
                 return Ok(editedSuccess);
             }
             catch (Exception Ex)
@@ -111,7 +111,7 @@ namespace task_tracker.Controllers
         {
             try
             {
-                var isDeleted = await _successesfacade.DeleteSuccessAsync(id);
+                var isDeleted = await _successesFacade.DeleteSuccessAsync(id);
                 return Ok(isDeleted);
             }
             catch (Exception Ex)

@@ -2,8 +2,8 @@ import { Success } from 'src/app/core/models/success.model'
 import { Component } from '@angular/core'
 
 /** Services */
-import { SuccessesHubService } from 'src/app/core/services/successes-hub.service'
 import { DataStoreService } from 'src/app/core/services/data-store.service'
+import { SuccessesHubService } from 'src/app/core/services/successes-hub.service'
 import { UsersHubService } from 'src/app/core/services/users-hub.service'
 
 /** RxJs */
@@ -30,10 +30,7 @@ export class WorkshopComponent {
   ) { }
 
   ngOnInit() {
-    this.successes = []
     this._successesHub.listenSuccesses()
-
-    this.users = []
     this._usersHub.listenUsers()
 
     this._store.successes
@@ -43,6 +40,7 @@ export class WorkshopComponent {
           this.countSuccesses++
           console.log('this.countSuccess: ', this.countSuccesses);
           this.successes = [...successes]
+          console.log('this.successes: ', this.successes);
         }
       )
 
@@ -53,6 +51,7 @@ export class WorkshopComponent {
           this.countUsers++
           console.log('this.countUser: ', this.countUsers);
           this.users = [...users]
+          console.log('this.users: ', this.users);
         }
       )
   }
