@@ -38,7 +38,7 @@ export class HomeComponent {
       // data: {
       //   id: '51gF3'
       // },
-      header: 'Registration'
+      width: '400px',
     });
   }
 }

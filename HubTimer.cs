@@ -34,6 +34,7 @@ namespace task_tracker
             using (IServiceScope scope = _serviceProvider.CreateScope())
             {
                 ISuccessesFacade _successesFacade = scope.ServiceProvider.GetRequiredService<ISuccessesFacade>();
+                IUsersFacade _usersFacade = scope.ServiceProvider.GetRequiredService<IUsersFacade>();
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
@@ -41,6 +42,7 @@ namespace task_tracker
                     {
                         _logger.LogInformation("HubTimer is running at: {time}", DateTimeOffset.Now);
                         await _successesFacade.GetAllSuccessesWithHub();
+                        await _usersFacade.GetAllUsersWithHub();
                     }
 
                     catch (Exception ex)

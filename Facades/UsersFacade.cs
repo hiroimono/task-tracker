@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using task_tracker.Hub;
 using task_tracker.Interfaces;
 using task_tracker.Models;
 
@@ -8,9 +10,14 @@ namespace task_tracker.Facades
     {
         private readonly ILogger<UsersFacade> _logger;
         private readonly Context _context;
+        private IHubContext<UserHub, IUserHubClient> messageHub;
 
-        public UsersFacade(Context context, ILogger<UsersFacade> logger)
+        public UsersFacade(
+            Context context,
+            ILogger<UsersFacade> logger,
+            IHubContext<UserHub, IUserHubClient> _messageHub)
         {
+            messageHub = _messageHub;
             _logger = logger;
             _context = context;
         }
@@ -148,6 +155,15 @@ namespace task_tracker.Facades
             query = query.OrderByDescending(c => c.Id);
 
             return await query.ToArrayAsync();
+        }
+
+        public System.Threading.Tasks.Task GetAllUsersWithHub()
+        {
+            _logger.LogInformation($"Getting all Users with Hub");
+
+            var users = _context.Users!.OrderByDescending(c => c.Id).ToArray();
+
+            return messageHub.Clients.All.SendUsersToUser(users);
         }
 
         public string GetUserAvatar(int Id)

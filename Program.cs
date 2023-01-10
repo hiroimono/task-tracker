@@ -10,10 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IUsersFacade, UsersFacade>();
-builder.Services.AddScoped<ITasksFacade, TasksFacade>();
 
 builder.Services.AddHostedService<HubTimer>();
+builder.Services.AddScoped<ITasksFacade, TasksFacade>();
+builder.Services.AddScoped<IUsersFacade, UsersFacade>();
 builder.Services.AddScoped<ISuccessesFacade, SuccessesFacade>();
 
 builder.Services.AddSignalR();
@@ -56,6 +56,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
     endpoints.MapHub<SuccessHub>("/successes");
+    endpoints.MapHub<SuccessHub>("/users");
 });
 app.UseHttpsRedirection();
 app.MapControllers();

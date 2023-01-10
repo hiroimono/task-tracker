@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 /** Services */
 import { SuccessesHubService } from './services/successes-hub.service';
+import { UsersHubService } from './services/users-hub.service';
 
 /** Components */
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
@@ -27,7 +28,8 @@ import { RippleModule } from 'primeng/ripple';
   ],
   providers: [
     HttpClientModule,
-    SuccessesHubService
+    SuccessesHubService,
+    UsersHubService
   ],
   exports: [
     NavMenuComponent,

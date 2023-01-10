@@ -1,16 +1,19 @@
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
 
 /** Services */
 import { DataStoreService } from './data-store.service';
-import { Success } from '../models/success.model';
 import { DataStore } from '../models/store.model';
+
+/** Models */
+import { User } from '../models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class SuccessesHubService {
+export class UsersHubService {
 
   private hubConnection!: signalR.HubConnection
 
@@ -22,29 +25,30 @@ export class SuccessesHubService {
 
   public startHubConnection = (): void => {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(`${environment.baseUrl}/successes`)
+      .withUrl(`${environment.baseUrl}/users`)
       .configureLogging(LogLevel.Information)
       .build();
 
     this.hubConnection
       .start()
-      .then(() => console.log('Successes Connection started.......!'))
+      .then(() => console.log('User Connection started.......!'))
       .catch(err => console.log('Error while starting connection: ' + err));
   }
 
-  public listenSuccesses() {
-    this.hubConnection.on('SendSuccessesToUser', (coming: Success[]) => {
-      console.log('coming successes: ', coming);
+  public listenUsers() {
+    this.hubConnection.on('SendUsersToUser', (coming: User[]) => {
+      console.log('coming users: ', coming);
 
       const newStoreValue: DataStore = {
-        successes: coming
+        users: coming
       } as DataStore
 
-      this._store.updateStore(newStoreValue, 'successes')
+      this._store.updateStore(newStoreValue, 'users')
     });
   }
 
-  public stopListenningSuccesses() {
-    this.hubConnection.off('SendSuccessesToUser')
+  public stopListenningUsers() {
+    this.hubConnection.off('SendUsersToUser')
   }
 }
+

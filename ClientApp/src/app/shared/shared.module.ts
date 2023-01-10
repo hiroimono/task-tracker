@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** PrimeNg Modules */
 import { RippleModule } from 'primeng/ripple';
@@ -11,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { RegisterComponent } from './components/register/register.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { CheckboxModule } from 'primeng/checkbox';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     RippleModule,
     StyleClassModule,
     AvatarModule,
@@ -25,9 +29,11 @@ import { CheckboxModule } from 'primeng/checkbox';
     TooltipModule,
     ButtonModule,
     DynamicDialogModule,
-    CheckboxModule
+    CheckboxModule,
+    BadgeModule
   ],
   exports: [
+    FormsModule,
     RegisterComponent,
     CommonModule,
     RippleModule,
@@ -37,7 +43,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     TooltipModule,
     ButtonModule,
     DynamicDialogModule,
-    CheckboxModule
+    CheckboxModule,
+    BadgeModule
   ]
 })
 export class SharedModule { }

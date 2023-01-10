@@ -1,45 +1,73 @@
-import { Success } from 'src/app/core/models/success.model';
-import { Component } from '@angular/core';
+import { Success } from 'src/app/core/models/success.model'
+import { Component } from '@angular/core'
 
 /** Services */
-import { SuccessesHubService } from 'src/app/core/services/successes-hub.service';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { SuccessesHubService } from 'src/app/core/services/successes-hub.service'
+import { DataStoreService } from 'src/app/core/services/data-store.service'
+import { UsersHubService } from 'src/app/core/services/users-hub.service'
+
+/** RxJs */
+import { Subject, Subscription, takeUntil } from 'rxjs'
+import { User } from 'src/app/core/models/user.model'
 
 @Component({
   selector: 'app-workshop-component',
   templateUrl: './workshop.component.html'
 })
 export class WorkshopComponent {
-  private compDestroyed$: Subject<boolean> = new Subject();
-  public successes: Success[] = [];
-  public subs!: Subscription;
-  private count = 0;
+  private destroy$: Subject<boolean> = new Subject()
+
+  public successes: Success[] = []
+  public users: User[] = []
+
+  private countSuccesses = 0
+  private countUsers = 0
 
   constructor(
-    private _successesHub: SuccessesHubService
-  ) {
-  }
+    private _store: DataStoreService,
+    private _successesHub: SuccessesHubService,
+    private _usersHub: UsersHubService
+  ) { }
 
   ngOnInit() {
     this.successes = []
     this._successesHub.listenSuccesses()
 
-    this.subs = this._successesHub.successes
-      .pipe(takeUntil(this.compDestroyed$))
+    this.users = []
+    this._usersHub.listenUsers()
+
+    this._store.successes
+      .pipe(takeUntil(this.destroy$))
       .subscribe(
         successes => {
-          this.count++
-          console.log('this.count: ', this.count);
+          this.countSuccesses++
+          console.log('this.countSuccess: ', this.countSuccesses);
           this.successes = [...successes]
+        }
+      )
+
+    this._store.users
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        users => {
+          this.countUsers++
+          console.log('this.countUser: ', this.countUsers);
+          this.users = [...users]
         }
       )
   }
 
   ngOnDestroy() {
-    this.compDestroyed$.next(true)
-    this.compDestroyed$.complete()
+    this.destroy$.next(true)
+    this.destroy$.complete()
+
     this._successesHub.stopListenningSuccesses()
-    this.count = 0
-    console.log('this.count: ', this.count)
+    this._usersHub.stopListenningUsers()
+
+    this.countSuccesses = 0
+    console.log('this.countSuccesses: ', this.countSuccesses)
+
+    this.countUsers = 0
+    console.log('this.countUsers: ', this.countUsers);
   }
 }

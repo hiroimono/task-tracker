@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using task_tracker.Facades;
 using task_tracker.Interfaces;
 using task_tracker.Models;
 
@@ -15,6 +16,15 @@ namespace task_tracker.Controllers
         {
             _logger = logger;
             _usersfacade = usersFacade;
+        }
+
+        [HttpPost]
+        [Route("Hub")]
+        public string GetAllUsersWithHub()
+        {
+            User[] users = _usersfacade.GetAllUsers();
+
+            return "Users sent successfully to all users!";
         }
 
         // GET api/users

@@ -1,24 +1,39 @@
 <div class="surface-card p-4 shadow-2 border-round w-full">
 	<div class="text-center mb-5">
-		<i class="fa fa-user fa-4x"></i>
-
-		<div class="text-900 text-3xl font-medium mb-3">
+		<div class="text-900 text-3xl font-medium my-3">
 			Welcome
 		</div>
+
+		<i *ngIf="!registerForm.value?.nickname; else Avatar" class="fa fa-user fa-4x"></i>
+
+		<ng-template #Avatar>
+			<div class="d-flex flex-column justify-content-center align-items-center">
+				<div class="iconBox bg-warning p-overlay-badge">
+					<img class="img-fluid" [src]="'https://robohash.org/'+ registerForm.value.nickname + '?set=set3'"
+						alt="robohash_img">
+					<p-badge [value]="registerForm.value.nickname"></p-badge>
+				</div>
+
+				<p class="text-muted">{{ registerForm.get('avatar')?.value }}</p>
+			</div>
+		</ng-template>
+
 	</div>
 
-	<div>
-		<label for="nickname" class="block text-900 font-medium mb-2">Nickname</label>
-		<input id="nickname" type="text" placeholder="Email address" pInputText class="w-full mb-3">
-
-		<label for="avatar" class="block text-900 font-medium mb-2">Avatar</label>
-		<input id="avatar" type="text" placeholder="Password" pInputText class="w-full mb-3">
-
-		<div class="d-flex flex-column justify-content-center align-items-center">
-			<div class="iconBox bg-warning">
-				<img class="img-fluid" src="https://robohash.org/huseyin?set=set3" alt="robohash_img">
-			</div>
+	<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+		<label for="nickname" class="form-label block text-900 font-medium mb-2">Nickname</label>
+		<div id="nickname" class="input-group mb-3">
+			<span class="input-group-text bg-dark" id="basic-addon1">
+				<i class="fa fa-user text-white"></i>
+			</span>
+			<input formControlName="nickname" type="text" class="form-control bg-dark text-white" placeholder="nickname"
+				aria-label="nickname" aria-describedby="basic-addon1" (ngModelChange)="setAvatar($event)">
 		</div>
+
+		<label for="avatar" class="d-none text-muted font-medium mb-2">Avatar</label>
+		<input formControlName="avatar" id="avatar" type="text" placeholder="avatar url"
+			class="d-none form-control bg-dark text-muted mb-3" pTooltip="filled automatically by typing nickname">
+
 		<!-- <div class="flex align-items-center justify-content-between mb-6">
 			<div class="flex align-items-center">
 				<p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
@@ -33,6 +48,7 @@
 			</a>
 		</div> -->
 
-		<button pButton pRipple label="Sign In" icon="pi pi-user" class="w-full mt-3"></button>
-	</div>
+		<button type="submit" [disabled]="!registerForm.valid" pButton pRipple label="Register"
+			icon="pi pi-cloud-upload" class="w-full mt-3 text-center"></button>
+	</form>
 </div>

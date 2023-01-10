@@ -3,19 +3,33 @@
 
 	<p>This is a simple example of an Angular component.</p>
 
-	<h3>All Successes</h3>
+	<div class="card mb-3">
+		<div class="card-header">
+			<h3>All Successes</h3>
+		</div>
+		<div class="card-body">
+			<ng-container *ngFor="let success of successes">
+				<div *ngIf="success.user" class="iconBox bg-warning p-overlay-badge">
+					<img class="img-fluid" [src]="'https://robohash.org/'+ success.user.nickname + '?set=set3'"
+						alt="robohash_img">
+					<p-badge [value]="success.user.nickname"></p-badge>
+				</div>
+			</ng-container>
+		</div>
+	</div>
 
-	<div class="col-12 md:col-4">
-		<h5>Avatar Group</h5>
-		<div class="card">
-			<div class="card-body">
-				<p-avatarGroup styleClass="mb-3">
-					<ng-container *ngFor="let success of successes">
-						<p-avatar *ngIf="success.user" [image]="success.user.avatar!" size="xlarge" shape="circle">
-						</p-avatar>
-					</ng-container>
-				</p-avatarGroup>
-			</div>
+	<div class="card mb-3">
+		<div class="card-header">
+			<h3>All Users</h3>
+		</div>
+		<div class="card-body">
+			<ng-container *ngFor="let user of users">
+				<div *ngIf="user" class="iconBox bg-warning p-overlay-badge">
+					<img class="img-fluid" [src]="'https://robohash.org/'+ user.nickname + '?set=set3'"
+						alt="robohash_img">
+					<p-badge [value]="user.nickname"></p-badge>
+				</div>
+			</ng-container>
 		</div>
 	</div>
 

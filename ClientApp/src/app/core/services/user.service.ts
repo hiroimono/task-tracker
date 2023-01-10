@@ -31,7 +31,7 @@ export class UserService {
 
   /** POST: /api/user { user } */
   addUser(user: User): Observable<User[]> {
-    return this.http.post<User[]>(`${this.baseUrl}/users`, user)
+    return this.http.post<User[]>(`${this.baseUrl}/api/users`, user)
       .pipe(
         map((users: User[]) => users)
       )

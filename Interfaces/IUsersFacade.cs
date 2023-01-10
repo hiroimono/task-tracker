@@ -1,4 +1,5 @@
 ﻿using task_tracker.Models;
+using Task = System.Threading.Tasks.Task;
 
 namespace task_tracker.Interfaces
 {
@@ -13,6 +14,7 @@ namespace task_tracker.Interfaces
         // GET
         User[] GetAllUsers();
         Task<User[]> GetAllUsersAsync();
+        Task GetAllUsersWithHub();
         User? GetUserById(int Id);
         Task<User?> GetUserByIdAsync(int Id);
         string GetUserAvatar(int Id);
