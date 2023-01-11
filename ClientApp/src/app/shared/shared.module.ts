@@ -13,6 +13,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { RegisterComponent } from './components/register/register.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { BadgeModule } from 'primeng/badge';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BadgeModule } from 'primeng/badge';
     ButtonModule,
     DynamicDialogModule,
     CheckboxModule,
-    BadgeModule
+    BadgeModule,
+    MessageModule,
   ],
   exports: [
     FormsModule,
@@ -44,7 +46,8 @@ import { BadgeModule } from 'primeng/badge';
     ButtonModule,
     DynamicDialogModule,
     CheckboxModule,
-    BadgeModule
+    BadgeModule,
+    MessageModule,
   ]
 })
 export class SharedModule { }

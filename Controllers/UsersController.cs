@@ -19,6 +19,7 @@ namespace task_tracker.Controllers
             _usersFacade = usersFacade;
         }
 
+        #region POST With Hub Requests
         [HttpPost]
         [Route("Hub")]
         public string GetAllUsersWithHub()
@@ -27,6 +28,9 @@ namespace task_tracker.Controllers
 
             return "Users sent successfully to all users!";
         }
+        #endregion
+
+        #region GET Requests
 
         // GET api/users
         [HttpGet]
@@ -115,7 +119,9 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status404NotFound, $"User Role with id:{id} could not found!");
             }
         }
+        #endregion
 
+        #region POST Requests
         // POST api/users { User }
         [HttpPost]
         public async Task<IActionResult> AddUser(User user)
@@ -128,11 +134,19 @@ namespace task_tracker.Controllers
             }
             catch (Exception Ex)
             {
-                _logger.LogError(Ex.Message);
+                _logger.LogError("ERROR: ", Ex.Message);
+
+                if (Ex.InnerException!.Message != null)
+                {
+                    _logger.LogError("INNER EXCEPTION: ", Ex.InnerException.Message);
+                }
+
                 return StatusCode(StatusCodes.Status400BadRequest, $"User could not be added!");
             }
         }
+        #endregion
 
+        #region PUT Requests
         // PUT api/users { User }
         [HttpPut]
         public async Task<IActionResult> EditUser(User user)
@@ -148,7 +162,9 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, $"User could not be edited!");
             }
         }
+        #endregion
 
+        #region DELETE Requests
         // DELETE api/users { User }
         [HttpDelete("{id}")]
         public IActionResult DeleteUserById(int id)
@@ -164,5 +180,6 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, $"User could not be deleted!");
             }
         }
+        #endregion
     }
 }

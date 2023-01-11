@@ -1,8 +1,8 @@
-<body>
-  <app-nav-menu></app-nav-menu>
-  <router-outlet></router-outlet>
+<div class="body">
+	<app-nav-menu></app-nav-menu>
+	<router-outlet></router-outlet>
 
-  <!-- <div class="container-fluid px-5-fluid">
+	<!-- <div class="container-fluid px-5-fluid">
     <h2>Data loaded from the Web API:</h2>
 
     <div *ngIf="successes.length>0" class="alert alert-warning" role="alert">
@@ -12,4 +12,7 @@
       </li>
     </div>
   </div> -->
-</body>
+</div>
+
+<p-toast position="bottom-right" showTransformOptions="translateX(100%)">
+</p-toast>

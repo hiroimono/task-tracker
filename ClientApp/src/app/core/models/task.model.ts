@@ -1,5 +1,5 @@
 export interface Task {
-  id: number,
+  id?: number,
   taskName: string,
   duration?: number,
   isActiv: boolean,

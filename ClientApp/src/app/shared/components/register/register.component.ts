@@ -7,6 +7,7 @@ import { UserService } from 'src/app/core/services/user.service';
 /** PrimeNg */
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
 
 /** Models */
 import { User } from 'src/app/core/models/user.model';
@@ -23,7 +24,8 @@ export class RegisterComponent {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     public fb: FormBuilder,
-    private _user: UserService
+    private _user: UserService,
+    private _message: MessageService
   ) {
     this.registerForm = this.initiateForm()
   }
@@ -37,7 +39,6 @@ export class RegisterComponent {
 
   public initiateForm(): FormGroup {
     return this.fb.group({
-      id: 0,
       isAdmin: false,
       nickname: ['', Validators.required],
       avatar: ''
@@ -49,7 +50,16 @@ export class RegisterComponent {
     console.log('userFormValue: ', userFormValue);
 
     this._user.addUser(userFormValue)
-      .subscribe(savedUser => console.log('savedUser: ', savedUser))
+      .subscribe({
+        next: savedUser => {
+          console.log('savedUser: ', savedUser)
+          this._message.add({ severity: 'success', summary: 'Done!', detail: 'User was registered!' })
+        },
+        error: (err: any) => {
+          console.log('Error: ', err)
+          this._message.add({ severity: 'error', summary: 'Oops, there is something wrong!', detail: 'User was NOT registered!' });
+        }
+      })
   }
 
   public setAvatar(event: any) {

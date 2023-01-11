@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SuccessesHubService } from './core/services/successes-hub.service';
 
 /** PrimeNg */
 import { PrimeNGConfig } from 'primeng/api';
@@ -13,7 +12,7 @@ export class AppComponent {
   public title = 'SignalRClient';
 
   constructor(
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
   ) { }
 
   ngOnInit(): void {

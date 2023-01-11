@@ -17,6 +17,7 @@ namespace task_tracker.Controllers
             _tasksfacade = tasksFacade;
         }
 
+        #region GET Requests
         // GET api/tasks
         [HttpGet]
         public async Task<IActionResult> GetAllTasks()
@@ -126,7 +127,9 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status404NotFound, $"Task with id:{id} could not found!");
             }
         }
+        #endregion
 
+        #region POST Requests
         // POST api/tasks { Task }
         [HttpPost]
         public async Task<IActionResult> AddTask(Task task)
@@ -143,7 +146,9 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, $"Task could not be added!");
             }
         }
+        #endregion
 
+        #region PUT Requests
         // PUT api/tasks { Task }
         [HttpPut]
         public async Task<IActionResult> EditTask(Task task)
@@ -159,7 +164,9 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, $"Task could not be edited!");
             }
         }
+        #endregion
 
+        #region DELETE Requests
         // DELETE api/tasks { Task }
         [HttpDelete("{id}")]
         public IActionResult DeleteTaskById(int id)
@@ -175,5 +182,6 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, $"Task could not be deleted!");
             }
         }
+        #endregion
     }
 }

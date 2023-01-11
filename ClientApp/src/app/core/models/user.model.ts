@@ -1,5 +1,5 @@
 export interface User {
-  id: number,
+  id?: number,
   isAdmin: boolean,
   nickname: string
   avatar?: string

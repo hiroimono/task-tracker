@@ -19,6 +19,8 @@ namespace task_tracker.Controllers
             _successesFacade = successesFacade;
         }
 
+        #region POST With Hub Requests
+
         [HttpPost]
         [Route("Hub")]
         public string GetAllSuccessesWithHub()
@@ -27,6 +29,10 @@ namespace task_tracker.Controllers
 
             return "Successes sent successfully to all users!";
         }
+
+        #endregion
+
+        #region GET Requests
 
         // GET api/successes
         [HttpGet]
@@ -71,6 +77,9 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status404NotFound, $"Success with id:{id} could not found!");
             }
         }
+        #endregion
+
+        #region PUT Requests
 
         // PUT api/successes/:taskId/:userId { Success }
         [HttpPut("{taskId}/{userId}")]
@@ -104,6 +113,9 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, $"Success could not be edited!");
             }
         }
+        #endregion
+
+        #region DELETE Requests
 
         // DELETE api/successes { Success }
         [HttpDelete("{id}")]
@@ -120,5 +132,6 @@ namespace task_tracker.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, $"Success could not be deleted!");
             }
         }
+        #endregion
     }
 }
