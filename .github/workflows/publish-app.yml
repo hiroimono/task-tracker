@@ -7,7 +7,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: task-tracker-01
   AZURE_WEBAPP_PACKAGE_PATH: '.' # Set this to the path to your web app project, defaults to the repository root:
-  DOTNET_VERSION: '6.0.406' # The .NET SDK version to use
+  DOTNET_VERSION: '6.0.x' # The .NET SDK version to use
 
 jobs:
   publish:
@@ -23,12 +23,12 @@ jobs:
 
     - name: Install dependencies
       run: dotnet restore
-
+      
     - name: Build
       run: |
         dotnet build --configuration Release --no-restore
-        dotnet publish -c Release -r linux-x64 --self-contained true /p:UseAppHost=true -o ./dotnet-webapp
-
+        dotnet publish -c Release -o ./dotnet-webapp -r linux-x64 --self-contained true /p:UseAppHost=true
+      
     - uses: azure/webapps-deploy@v2
       name: Deploy
       with:
