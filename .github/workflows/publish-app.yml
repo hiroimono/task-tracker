@@ -23,12 +23,12 @@ jobs:
 
     - name: Install dependencies
       run: dotnet restore
-      
+
     - name: Build
       run: |
         dotnet build --configuration Release --no-restore
-        dotnet publish -c Release -o ./dotnet-webapp -r linux-x64 --self-contained true /p:UseAppHost=true
-      
+        dotnet publish ~/work/task-tracker/task-tracker/task-tracker.csproj -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp -r linux-x64 --self-contained true /p:UseAppHost=true
+
     - uses: azure/webapps-deploy@v2
       name: Deploy
       with:
