@@ -1,8 +1,12 @@
 {
   "name": "task_tracker",
   "version": "0.0.0",
+  "engines": {
+    "npm": ">=8.0.0 <10.0.0",
+    "node": ">=18.0.0 <19.0.0"
+  },
   "scripts": {
-    "ng": "ng",
+    "ng": "npx @angular/cli15",
     "prestart": "node aspnetcore-https",
     "start": "run-script-os",
     "start:windows": "ng serve --port 44410 --ssl --ssl-cert %APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem --ssl-key %APPDATA%\\ASP.NET\\https\\%npm_package_name%.key",
